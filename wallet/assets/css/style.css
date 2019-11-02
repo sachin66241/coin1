@@ -1,0 +1,167 @@
+
+body {
+    background-color: #0a1326;
+    color: #3C4858;
+    font-weight: 300;
+}
+.change-rate{
+    padding: 4.4%;
+}
+.sidebar .sidebar-wrapper {
+    position: relative;
+    height: calc(100vh - 75px);
+    overflow: auto;
+    width: 260px;
+    z-index: 4;
+    padding-bottom: 30px;
+    background: #111930;
+}
+
+.sidebar .nav p {
+    margin: 0;
+    line-height: 30px;
+    font-size: 14px;
+    position: relative;
+    display: block;
+    height: auto;
+    white-space: nowrap;
+    color: #fff;
+}
+.sidebar .logo {
+    padding: 15px 0px;
+    margin: 0;
+    display: block;
+    position: relative;
+    z-index: 4;
+    background: #0a1326;
+}
+.navbar .navbar-brand {
+    position: relative;
+    color: inherit;
+    height: 50px;
+    font-size: 1.125rem;
+    line-height: 30px;
+    padding: 0.625rem 0;
+    font-weight: 300;
+    margin-left: 1rem;
+    color: #fff;
+}
+.main-panel > .content {
+    margin-top: 70px;
+    padding: 30px 15px;
+    min-height: calc(100vh - 123px);
+    background: #0a1326;
+}
+.btn.btn-primary:focus, .btn.btn-primary:active, .btn.btn-primary:hover {
+    box-shadow: 0 14px 26px -12px rgba(46, 170, 255, 0.58), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(46, 171, 255, 0.12);
+}
+.card .card-header-primary .card-icon, .card .card-header-primary:not(.card-header-icon):not(.card-header-text), .card .card-header-primary .card-text {
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(30, 164, 255, 0.4);
+}
+.btn.btn-primary {
+    color: #fff;
+    background-color: #d0a911;
+    border-color: #d0a911;
+    box-shadow: 0 2px 2px 0 rgba(38, 168, 255, .14), 0 3px 1px -2px rgba(37, 167, 255, .2), 0 1px 5px 0 rgba(33, 165, 255, .12);
+}
+.sidebar[data-color="purple"] li.active > a {
+    background-color: #d0a911;
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(5, 154, 255, .4);
+}
+/**
+	 * Overlay
+	 * -- only show for tablet and up
+	 */
+     @media only screen and (min-width: 40em) {
+		.modal-overlay {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 5;
+			background-color: rgba(0, 0, 0, 0.6);
+			opacity: 0;
+			visibility: hidden;
+			-webkit-backface-visibility: hidden;
+							backface-visibility: hidden;
+			transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1), visibility 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+		}
+		.modal-overlay.active {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+	/**
+	 * Modal
+	 */
+	.modal {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		margin: 0 auto;
+		background-color: #fff;
+		width: 600px;
+		max-width: 75rem;
+		min-height: 20rem;
+		padding: 1rem;
+		border-radius: 3px;
+		opacity: 0;
+		overflow-y: auto;
+		visibility: hidden;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		-webkit-backface-visibility: hidden;
+						backface-visibility: hidden;
+		-webkit-transform: scale(1.2);
+						transform: scale(1.2);
+		transition: all 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+	}
+	.modal .close-modal {
+		position: absolute;
+		cursor: pointer;
+		top: 5px;
+		right: 15px;
+		opacity: 0;
+		-webkit-backface-visibility: hidden;
+						backface-visibility: hidden;
+		transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+		transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1), transform 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+		transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1), transform 0.6s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+		transition-delay: 0.3s;
+	}
+	.modal .close-modal svg {
+		width: 1.75em;
+		height: 1.75em;
+	}
+	.modal .modal-content {
+		opacity: 0;
+		-webkit-backface-visibility: hidden;
+						backface-visibility: hidden;
+		transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+		transition-delay: 0.3s;
+	}
+	.modal.active {
+		visibility: visible;
+		opacity: 1;
+		-webkit-transform: scale(1);
+						transform: scale(1);
+	}
+	.modal.active .modal-content {
+		opacity: 1;
+	}
+	.modal.active .close-modal {
+		-webkit-transform: translateY(10px);
+						transform: translateY(10px);
+		opacity: 1;
+	}
+	.modal-content {
+        box-shadow: none !important;
+        border: none !important;
+    }
+	/**
+	 * Mobile styling
+	 */
