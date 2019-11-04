@@ -1,10 +1,15 @@
 async function connect(){
 	
 	if (typeof web3 !== 'undefined') {
-		await ethereum.enable();
-		web3 = new Web3(web3.currentProvider)
-		console.log(web3.eth.coinbase);
+		var enb = await ethereum.enable();
+	
+			web3 = new Web3(web3.currentProvider)
+			//console.log(web3.eth.coinbase);
 		
+		if( web3.eth.coinbase == null){
+			window.location.reload();
+
+		}
 		if (web3.eth.coinbase == null) {
 			$("#modalHeading").text("Metamask is locked. Please unlock your Metamask.");
 			$("#modalText").text("Unlock metamask to access this portal");

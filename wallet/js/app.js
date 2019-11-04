@@ -1,29 +1,7 @@
 // Import our contract artifacts and turn them into usable abstractions.
  web3 = new Web3(web3.currentProvider);
-const contractAddress = "0xb0114b7909f6bc304fa29b826ddbdd6faa37d9a4";
+const contractAddress = "0x2f64EF30fc3A0E4c902cAFD358d81Fa2E0f70bbF";
       const contractABI= [
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": true,
-                    "name": "owner",
-                    "type": "address"
-                },
-                {
-                    "indexed": true,
-                    "name": "spender",
-                    "type": "address"
-                },
-                {
-                    "indexed": false,
-                    "name": "value",
-                    "type": "uint256"
-                }
-            ],
-            "name": "Approval",
-            "type": "event"
-        },
         {
             "constant": false,
             "inputs": [
@@ -60,13 +38,32 @@ const contractAddress = "0xb0114b7909f6bc304fa29b826ddbdd6faa37d9a4";
             "anonymous": false,
             "inputs": [
                 {
+                    "indexed": true,
+                    "name": "from",
+                    "type": "address"
+                },
+                {
                     "indexed": false,
-                    "name": "newRate",
-                    "type": "uint64"
+                    "name": "value",
+                    "type": "uint256"
                 }
             ],
-            "name": "SetRate",
+            "name": "Burn",
             "type": "event"
+        },
+        {
+            "constant": false,
+            "inputs": [],
+            "name": "freeze",
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
         },
         {
             "anonymous": false,
@@ -84,6 +81,72 @@ const contractAddress = "0xb0114b7909f6bc304fa29b826ddbdd6faa37d9a4";
             ],
             "name": "OwnershipTransferred",
             "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "success",
+                    "type": "bool"
+                }
+            ],
+            "name": "Freeze",
+            "type": "event"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "newRate",
+                    "type": "uint64"
+                }
+            ],
+            "name": "setRate",
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "newRate",
+                    "type": "uint64"
+                }
+            ],
+            "name": "SetRate",
+            "type": "event"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "name": "tokens",
+                    "type": "uint256"
+                }
+            ],
+            "name": "transfer",
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
         },
         {
             "anonymous": false,
@@ -112,7 +175,12 @@ const contractAddress = "0xb0114b7909f6bc304fa29b826ddbdd6faa37d9a4";
             "inputs": [
                 {
                     "indexed": true,
-                    "name": "from",
+                    "name": "owner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "spender",
                     "type": "address"
                 },
                 {
@@ -121,76 +189,8 @@ const contractAddress = "0xb0114b7909f6bc304fa29b826ddbdd6faa37d9a4";
                     "type": "uint256"
                 }
             ],
-            "name": "Burn",
+            "name": "Approval",
             "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "name": "success",
-                    "type": "bool"
-                }
-            ],
-            "name": "Freeze",
-            "type": "event"
-        },
-        {
-            "constant": false,
-            "inputs": [],
-            "name": "freeze",
-            "outputs": [
-                {
-                    "name": "success",
-                    "type": "bool"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "name": "newRate",
-                    "type": "uint64"
-                }
-            ],
-            "name": "setRate",
-            "outputs": [
-                {
-                    "name": "success",
-                    "type": "bool"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "name": "to",
-                    "type": "address"
-                },
-                {
-                    "name": "tokens",
-                    "type": "uint256"
-                }
-            ],
-            "name": "transfer",
-            "outputs": [
-                {
-                    "name": "success",
-                    "type": "bool"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
         },
         {
             "constant": false,
@@ -262,15 +262,15 @@ const contractAddress = "0xb0114b7909f6bc304fa29b826ddbdd6faa37d9a4";
             "type": "function"
         },
         {
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "fallback"
+        },
+        {
             "inputs": [],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "constructor"
-        },
-        {
-            "payable": true,
-            "stateMutability": "payable",
-            "type": "fallback"
         },
         {
             "constant": false,
@@ -496,7 +496,7 @@ const contractAddress = "0xb0114b7909f6bc304fa29b826ddbdd6faa37d9a4";
             "stateMutability": "view",
             "type": "function"
         }
-    ];
+    ]
 
 const goldMint = web3.eth.contract(contractABI).at(contractAddress);
 var wei //Amount of eth in selected account
@@ -706,7 +706,7 @@ function through(){
 }
 
 
-window.addEventListener('load', function() {
+window.addEventListener('load', async function() {
     $("#reload-notification").click(function(){
       location.reload();
     })
@@ -718,8 +718,15 @@ window.addEventListener('load', function() {
 
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof web3 !== 'undefined') {
+      await ethereum.enable();
+    
       console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
       web3 = new Web3(web3.currentProvider);
+      if( web3.eth.coinbase == null){
+            window.location.reload();
+
+        }
+
       if (web3.eth.coinbase == null) {
         $("#metamask-notification").text("Metamask is locked. Please unlock your Metamask.");
         $('#myModal').modal('show');
@@ -738,7 +745,7 @@ window.addEventListener('load', function() {
       }
      
       App.start();
-    //   log();
+       log();
     } else {
       $('#myModal').modal('show');
       $("#metamask-notification").text("Metamask is NOT installed.");
@@ -751,7 +758,7 @@ window.addEventListener('load', function() {
 var account = web3.eth.accounts[0]; //For dynamically changing the adderss displayed, when account is changed
 
 var accountInterval = setInterval(function() {
-    
+    //console.log("gggg",web3.eth.accounts[0] )
     if (web3.eth.accounts[0] !== account) {
         account = web3.eth.accounts[0];
         App.start();
@@ -771,26 +778,26 @@ var accountInterval = setInterval(function() {
 //       })
 //     })
 //   }
-
+//console.log("am inside log")
 function log(){
+   // console.log("am inside log",tnx)
 
     for (var i = txn.rows.length - 1; i > 0; i--) {
         txn.deleteRow(i);
     }
-  $.getJSON('http://api-ropsten.etherscan.io/api?module=account&action=tokentx&address='+web3.eth.coinbase+'&startblock=0&endblock=999999999&sort=asc&apikey=6FKPVABZRBT68J1EWB8Z7HUZDK6BEH7EI7 \
-  ', function(data) {
+  $.getJSON('http://api-ropsten.etherscan.io/api?module=account&action=tokentx&address='+web3.eth.coinbase+'&startblock=0&endblock=999999999&sort=asc&apikey=6FKPVABZRBT68J1EWB8Z7HUZDK6BEH7EI7', function(data) {
         
-    // console.log(data.result[1]);
-    // console.log(data.result.length);
+     console.log(data.result[0]);
+     console.log(contractAddress);
 
       for(var i=0; i<data.result.length; i++){
-          if(data.result[i].contractAddress == contractAddress)
+          if(data.result[i].contractAddress.toUpperCase() == contractAddress.toUpperCase())
           {
         //   console.log("time:", dt);
           var dt = data.result[i].timeStamp;
-        //   console.log("time:", dt);
+          console.log("time:", dt);
           var myDate = new Date( dt *1000);
-        //   console.log(myDate);
+          //console.log(myDate);
           var gmt = (myDate.toLocaleString());
         //   ^myDate.toGMTString()+"<br>"+^
 
