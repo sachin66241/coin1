@@ -6,7 +6,7 @@ pragma solidity ^0.4.24;
 //
 // Symbol      : GMT
 // Name        : GoldMint Token
-// Total supply: 1,000,000,000.000000000000000000
+// Total supply: 5,000,000,000.000000000000000000
 // Decimals    : 18
 // ----------------------------------------------------------------------------
 
@@ -176,7 +176,7 @@ contract GMT is ERC20Interface, Owned {
 
         rate = 10;
 
-        _totalSupply = 1000000000 * 10**uint(decimals);
+        _totalSupply = 5000000000 * 10**uint(decimals);
 
         balances[owner] = _totalSupply;
 

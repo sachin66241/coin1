@@ -1,10 +1,8 @@
-setInterval(function(){
+async function connect(){
 	if (typeof web3 !== 'undefined') {
+		await ethereum.enable();
 		web3 = new Web3(web3.currentProvider);
 		if (web3.eth.coinbase == null) {
-			// console.log("////// locked ///////");
-			// console.log(web3.eth.coinbase)
-			// console.log("/////////////");
 			$("#modalHeading").text("Metamask is locked. Please unlock your Metamask.");
 			$("#modalText").text("Unlock metamask to access this portal");
 			$("#modalImage").attr("src","assets/img/MetamaskLocked.png");
@@ -15,9 +13,7 @@ setInterval(function(){
 			});
 		}
 		else if (web3.version.network != 3){
-			// console.log("//////wrong n/w///////");
 			// console.log(web3.version.network);
-			// console.log("/////////////");
 			$("#modalHeading").text("Metamask is in wrong network.");
 			$("#modalText").text("Please Change the network into 'Ropsten Network' .");
 			$("#modalImage").attr("src","assets/img/wrong-nw.png");
@@ -27,14 +23,10 @@ setInterval(function(){
 				$('.modal-overlay, .modal').removeClass('active');
 			});
 		}
-		
 		else{
 			$('.modal-overlay, .modal').removeClass('active');
 		}
-	
-	
 	}
-	
 	else {
 		var elements = $('.modal-overlay, .modal');
 	//	$("#modalText").text("Unlock metamask to access this portal");
@@ -45,10 +37,10 @@ setInterval(function(){
 			elements.removeClass('active');
 		});
 		elements.addClass('active');
-	}	
+	}
+}
 
-}, 1000);
-
+connect();
 
 
 /////////////////////////////////////////////////////////////////////
@@ -683,5 +675,3 @@ setInterval(function(){
 			currentStatus();
 		}
 	});
-
-	
